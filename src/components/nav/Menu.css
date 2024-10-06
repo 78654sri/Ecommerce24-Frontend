@@ -1,0 +1,48 @@
+
+.nav-link {
+    color: pink;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.nav-item .nav-link {
+    font-weight: bold;
+    font-size: 29px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.nav-item .nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -1px;
+    left: 0;
+    background-color: lightpink;
+    transition: width 0.3s ease;
+}
+
+.nav-item .nav-link:hover::after {
+    width: 100%;
+}
+
+.nav-item .nav-link:hover {
+    color: lightpink;
+
+}
+.nav .nav-item{
+    background-color:purple;
+    height:40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+   
+
+}
+.nav-item {
+    margin:30px;
+   border-radius:8px;
+}
+.nav{
+    background-color:purple;
+}

@@ -1,0 +1,36 @@
+/* slider.css */
+
+.carousel {
+    margin: 0 auto;
+    max-width: 3000px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .carousel img {
+    border-radius: 10px;
+    height: 550px;
+    object-fit: cover;
+  }
+  
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    width: 20px;
+    height: 40px;
+  }
+  
+  button.carousel-control-prev,
+  button.carousel-control-next {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  button.carousel-control-prev:hover,
+  button.carousel-control-next:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+  
+  
