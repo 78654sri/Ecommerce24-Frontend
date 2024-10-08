@@ -18,9 +18,8 @@ export default function Menu() {
         <>
           <ul className="nav justify-content-center shadow">
             <li className="nav-item">
-              <NavLink className="nav-link active" aria-current="page" to="/">Home</NavLink>
+              <NavLink className="nav-link" aria-current="page" to="/">Home</NavLink>
             </li>
-      
             {!auth?.user ? (
               <>
                 <li className="nav-item">
@@ -31,10 +30,19 @@ export default function Menu() {
                 </li>
               </>
             ) : (
-              <li className="nav-item">
-              
-                <button onClick={logout} className="nav-link" style={{ background: 'none', border: 'none', padding: 0 }}>Logout</button>
-              </li>
+                <li className="nav-item dropdown">
+                    <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        {auth?.user?.name}
+                    </a>
+                    <ul className="dropdown-menu">
+                        <li>
+                            <NavLink className="dropdown-item" to={`/dashboard/${auth?.user?.role === 1 ? "admin" : "user"}`}>Dashboard</NavLink>    
+                        </li>
+                        <li>
+                            <button onClick={logout} className="dropdown-item">Logout</button>
+                        </li>
+                    </ul>
+                </li>
             )}
           </ul>
         </>
