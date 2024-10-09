@@ -1,8 +1,8 @@
 import { useAuth } from "../../components/context/auth";
 
-import AdminMenu from "../../components/nav/AdminMenu";
+import UserMenu from "../../components/nav/UserMenu";
 
-export default function AdminDashboard(){
+export default function Profile(){
    const [auth] = useAuth();
 
    return (
@@ -16,7 +16,7 @@ export default function AdminDashboard(){
                         <span className="text-primary">👋 {`Hello ${auth?.user?.name}`} 😊</span>
                      </h2>
                      <h3 className="card-subtitle text-center mb-4 text-muted">
-                        Admin Dashboard
+                         Dashboard
                      </h3>
                   </div>
                </div>
@@ -26,15 +26,10 @@ export default function AdminDashboard(){
       <div className="container-fluid">
         <div className="row">
             <div className="col-md-3">
-                <AdminMenu />
+                <UserMenu />
             </div>
             <div className="col-md-9">
-            <div className="p-3 mt-2 mb-2 h4 bg-light"><h4>Admin Information</h4></div>
-            <ul className="list-group">
-                <li className="list-group-item" >{auth?.user?.name}</li>
-                <li className="list-group-item">{auth?.user?.email}</li>
-                <li className="list-group-item">Admin</li>
-            </ul>
+            <div className="p-3 mt-2 mb-2 h4 bg-light"><h4>Profile</h4></div>
             </div>
         </div>
       </div>
