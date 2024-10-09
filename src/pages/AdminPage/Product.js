@@ -2,7 +2,7 @@ import { useAuth } from "../../components/context/auth";
 
 import AdminMenu from "../../components/nav/AdminMenu";
 
-export default function AdminDashboard(){
+export default function Product(){
    const [auth] = useAuth();
 
    return (
@@ -29,12 +29,8 @@ export default function AdminDashboard(){
                 <AdminMenu />
             </div>
             <div className="col-md-9">
-            <div className="p-3 mt-2 mb-2 h4 bg-light"><h4>Admin Information</h4></div>
-            <ul className="list-group">
-                <li className="list-group-item" >{auth?.user?.name}</li>
-                <li className="list-group-item">{auth?.user?.email}</li>
-                <li className="list-group-item">Admin</li>
-            </ul>
+            <div className="p-3 mt-2 mb-2 h4 bg-light"><h4>create product</h4></div>
+            <p>create product form</p>
             </div>
         </div>
       </div>
