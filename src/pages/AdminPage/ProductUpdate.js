@@ -3,12 +3,12 @@ import { useState, useEffect } from "react";
 import AdminMenu from "../../components/nav/AdminMenu";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import {Navigate, useParams } from "react-router-dom";
 import { Select } from "antd";
 
 const {Option} = Select;
 
-export default function Product() {
+export default function ProductUpdate() {
   const [auth] = useAuth();
 
   // State
@@ -20,14 +20,33 @@ export default function Product() {
   const [category, setCategory] = useState("");
   const [shipping,setShipping] = useState("");
   const [quantity,setQuantity] = useState("");
+  const [id,setId] = useState("")
 
 
-  const navigate = useNavigate();
+  const params = useParams();
+  
+  useEffect(() => {
+    loadProduct();
+  }, []);
   // Fetch categories on component mount
   useEffect(() => {
     loadCategories();
   }, []);
-
+  
+  const loadProduct = async () => {
+    try {  
+      const { data } = await axios.get(`/product/${params.slug}`);
+      setName(data.name);
+      setDescription(data.description);
+      setPrice(data.price);
+      setCategory(data.category);
+      setShipping(data.shipping);
+      setQuantity(data.quantity);
+      setId(data._id);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   // Fetch categories from the backend
   const loadCategories = async () => {
     try {
@@ -37,6 +56,18 @@ export default function Product() {
       console.log(err);
     }
   };
+
+  const handleDelete = async () =>{
+    try{
+        let answer = window.confirm("Are you sure deleting this product");
+        if(!answer) return;
+        const {data} = await axios.delete(`/product/${id}`);
+        toast.success(`"${data.name}" is deleted`);
+    }catch(err){
+       console.log(err);
+       toast.error("Delete failed try again")
+    }
+  }
 
   const handleSubmit = async (e)=>{
    e.preventDefault();
@@ -52,12 +83,12 @@ export default function Product() {
       productData.append("shipping",shipping)
       productData.append("quantity",quantity)
       productData.append("price", price);
-      const {data} = await axios.post("/product" , productData);
+      const {data} = await axios.put(`/product/${id}` , productData);
       if(data?.error){
          toast.error(data.error)
       }else{
-         toast.success(`"${data.name}" is created`);
-         navigate("dashboard/admin/products")
+         toast.success(`"${data.name}" is updated`);
+        
       }
    }catch(err){
      console.log(err)
@@ -94,15 +125,18 @@ export default function Product() {
           </div>
           <div className="col-md-9">
             <div className="p-3 mt-2 mb-2 h4 bg-light">
-              <h4>Create Product</h4>
+              <h4>Update Product</h4>
             </div>
 
 
-            {photo && (
+            {photo ? (
                <div className="text-center">
                   <img src={URL.createObjectURL(photo)} alt="product pic" className="img img-responsive" height="200px"></img>
                </div>
-            )}
+            ):<div className="text-center">
+                <img src={`${process.env.REACT_APP_API}/product/photo/${id}`} alt="product pic" className="img img-responsive" height="200px"></img>
+                </div>
+                }
 
             <div className="p-3">
                <label className="btn btn-outline-secondary col-12 mb-1">
@@ -115,18 +149,18 @@ export default function Product() {
             <textarea type="text" className="form-control mb-3 p-2" placeholder="write a description" value={description} onChange={(e)=> setDescription(e.target.value)}></textarea>
             <Select  bordered={false} size="large" className="form-select mb-3" placeholder="choose category" value={category} onChange={(value)=> setCategory(value)}>
                {
-                  categories.map((c) => <Option key={c._id} value={c._id}>{c.name}</Option>)
+                  categories?.map((c) => <Option key={c._id} value={c._id}>{c.name}</Option>)
                }
             </Select>
             <input type="number" className="form-control mb-3 p-2" placeholder="Enter Price" value={price} onChange={(e)=> setPrice(e.target.value)}></input>
            
-            <Select  bordered={false} size="large" className="form-select mb-3" placeholder="choose Shipping"  onChange={(value)=> setShipping(value)}>
+            <Select  bordered={false} size="large" className="form-select mb-3" placeholder="choose Shipping"  value={shipping === 0 ? "No" : "Yes"} onChange={(value)=> setShipping(value)}>
               <Option value="0">No</Option>
               <Option value="1">Yes</Option>
             </Select>
             <input type="number" min="1" className="form-control mb-3 p-2" placeholder="Enter Quantity" value={quantity} onChange={(e)=> setQuantity(e.target.value)}></input>
-            <button className="form-control btn btn-primary mb-5" onClick={handleSubmit}>submit</button>
-           
+            <button className="form-control btn btn-primary mb-2" onClick={handleSubmit}>Update</button>
+            <button className="form-control btn btn-danger mb-5" onClick={handleDelete}>Delete</button>
           </div>
         </div>
       </div>

@@ -20,6 +20,11 @@ export default function Menu() {
             <li className="nav-item">
               <NavLink className="nav-link" aria-current="page" to="/">Home</NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" aria-current="page" to="/shop">
+                <i className="fas fa-shopping-cart"></i> Shop
+              </NavLink>
+            </li>
             {!auth?.user ? (
               <>
                 <li className="nav-item">

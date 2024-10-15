@@ -13,6 +13,10 @@ import Category from "./pages/AdminPage/Category";
 import Product from "./pages/AdminPage/Product";
 import Orders from "./pages/userPages/Orders";
 import Profile from "./pages/userPages/Profile";
+import AdminProducts from "./pages/AdminPage/AdminProducts"
+import ProductUpdate from "./pages/AdminPage/ProductUpdate";
+import Shop from "./pages/userPages/Shop";
+
 export default function App() {
   return (
     <BrowserRouter>
@@ -20,6 +24,7 @@ export default function App() {
       <Toaster />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/shop" element={<Shop />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Routee />}> 
@@ -31,6 +36,8 @@ export default function App() {
           <Route path="admin" element={<AdminDashboard />} />
           <Route path="admin/category" element={<Category />} />
           <Route path="admin/product" element={<Product />} />
+          <Route path="admin/product/update/:slug" element={<ProductUpdate />} />
+          <Route path="admin/products" element={<AdminProducts />} />
         </Route>
         <Route path="*" element={<PageNotFound />} replace />
       </Routes>
