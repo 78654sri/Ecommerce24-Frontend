@@ -52,12 +52,13 @@ export default function Product() {
       productData.append("shipping",shipping)
       productData.append("quantity",quantity)
       productData.append("price", price);
+
       const {data} = await axios.post("/product" , productData);
       if(data?.error){
          toast.error(data.error)
       }else{
          toast.success(`"${data.name}" is created`);
-         navigate("dashboard/admin/products")
+         navigate("/dashboard/admin/products")
       }
    }catch(err){
      console.log(err)
@@ -99,16 +100,27 @@ export default function Product() {
 
 
             {photo && (
-               <div className="text-center">
-                  <img src={URL.createObjectURL(photo)} alt="product pic" className="img img-responsive" height="200px"></img>
-               </div>
+              <div className="text-center">
+                <img
+                  src={URL.createObjectURL(photo)}
+                  alt="product "
+                  className="img img-responsive"
+                  height="200px"
+                />
+              </div>
             )}
 
-            <div className="p-3">
-               <label className="btn btn-outline-secondary col-12 mb-1">
-                  {photo ? photo.name :"Upload photo"}
-                  <input type="file" name="photo" accept="image/*" onChange={e=> setPhoto(e.target.files[0])} hidden></input>
-               </label> 
+            <div className="pt-2">
+              <label className="btn btn-outline-secondary col-12 mb-3">
+                {photo ? photo.name : "Upload photo"}
+                <input
+                  type="file"
+                  name="photo"
+                  accept="image/*"
+                  onChange={(e) => setPhoto(e.target.files[0])}
+                  hidden
+                />
+              </label>
             </div>
 
             <input type="text" className="form-control mb-3 p-2" placeholder="write a name" value={name} onChange={(e)=> setName(e.target.value)}></input>
@@ -126,7 +138,6 @@ export default function Product() {
             </Select>
             <input type="number" min="1" className="form-control mb-3 p-2" placeholder="Enter Quantity" value={quantity} onChange={(e)=> setQuantity(e.target.value)}></input>
             <button className="form-control btn btn-primary mb-5" onClick={handleSubmit}>submit</button>
-           
           </div>
         </div>
       </div>

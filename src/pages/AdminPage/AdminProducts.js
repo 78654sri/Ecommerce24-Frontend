@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import AdminMenu from "../../components/nav/AdminMenu";
 import { Link } from "react-router-dom";
+import moment from "moment";
 export default function AdminProducts(){
    const [auth] = useAuth();
 
@@ -17,7 +18,7 @@ export default function AdminProducts(){
       try{
          const {data} = await axios.get("/products");
          console.log(data);
-         setProducts(data.products);
+         setProducts(data);
       }catch(err){
          console.log(err)
       }
@@ -57,18 +58,22 @@ export default function AdminProducts(){
                   </div>
                   <div className="col-md-8">
                        <div className="card-body text-center">
-                        <h5 className="card-title text-primary">{p.name}</h5>
-                        <p className="card-text text-muted">{p.description}</p>
+                        <h5 className="card-title text-primary">{p?.name}</h5>
+                        <p className="card-text text-muted">{p?.description}</p>
                         <p className="card-text">
-                           <small className="text-secondary">{p.createdAt}</small>
+                        <small className="text-muted">
+                            {moment(p.createdAt).format(
+                              "MMMM Do YYYY, h:mm:ss a"
+                            )}
+                          </small>
                         </p>
                        </div>
                   </div>
 
                </div>
              </div>
-             </Link>)}
-
+             </Link>
+            )}
             </div>
         </div>
       </div>

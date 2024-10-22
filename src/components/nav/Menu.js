@@ -1,11 +1,17 @@
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../context/auth";
 import { useNavigate } from "react-router-dom";
+import { useCart } from "../context/Cart";
+import Search from "../form/Search";
 import "./Menu.css"
+import { Badge } from "antd";
 export default function Menu() {
 
     const [auth,setAuth] = useAuth();
+    const [cart,setCart]= useCart();
     const navigate = useNavigate();
+
+   
 
     const logout = ()=>{
         setAuth({...auth,user:null,token:""});
@@ -16,7 +22,7 @@ export default function Menu() {
 
     return (
         <>
-          <ul className="nav justify-content-center shadow">
+          <ul className="nav justify-content-center shadow sticky-top">
             <li className="nav-item">
               <NavLink className="nav-link" aria-current="page" to="/">Home</NavLink>
             </li>
@@ -25,6 +31,17 @@ export default function Menu() {
                 <i className="fas fa-shopping-cart"></i> Shop
               </NavLink>
             </li>
+            <li className="nav-item">
+              <Badge count={cart?.length>=1 ? cart.length:0} offset={[-5, 13]} showZero={true} >
+                   <NavLink className="nav-link" aria-current="page" to="/cart">
+                     <i className="fas fa-shopping-cart"></i> Cart
+                   </NavLink>
+              </Badge>
+             
+            </li>
+
+            <Search />
+
             {!auth?.user ? (
               <>
                 <li className="nav-item">

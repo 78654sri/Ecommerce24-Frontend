@@ -3,10 +3,10 @@ import { useState, useEffect } from "react";
 import AdminMenu from "../../components/nav/AdminMenu";
 import axios from "axios";
 import toast from "react-hot-toast";
-import {Navigate, useParams } from "react-router-dom";
+import {useNavigate, useParams } from "react-router-dom";
 import { Select } from "antd";
 
-const {Option} = Select;
+const { Option } = Select;
 
 export default function ProductUpdate() {
   const [auth] = useAuth();
@@ -20,9 +20,10 @@ export default function ProductUpdate() {
   const [category, setCategory] = useState("");
   const [shipping,setShipping] = useState("");
   const [quantity,setQuantity] = useState("");
-  const [id,setId] = useState("")
+  const [id, setId] = useState("")
 
-
+  // hook
+  const navigate = useNavigate();
   const params = useParams();
   
   useEffect(() => {
@@ -33,13 +34,25 @@ export default function ProductUpdate() {
     loadCategories();
   }, []);
   
+// Fetch categories from the backend
+  const loadCategories = async () => {
+        try {
+          const { data } = await axios.get("/categories");
+          setCategories(data);
+        } catch (err) {
+          console.log(err);
+        }
+      };
+
+
+// Fetch products from the backend
   const loadProduct = async () => {
     try {  
       const { data } = await axios.get(`/product/${params.slug}`);
       setName(data.name);
       setDescription(data.description);
       setPrice(data.price);
-      setCategory(data.category);
+      setCategory(data.category._id);
       setShipping(data.shipping);
       setQuantity(data.quantity);
       setId(data._id);
@@ -47,15 +60,7 @@ export default function ProductUpdate() {
       console.log(err);
     }
   };
-  // Fetch categories from the backend
-  const loadCategories = async () => {
-    try {
-      const { data } = await axios.get("/categories");
-      setCategories(data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+
 
   const handleDelete = async () =>{
     try{
@@ -63,6 +68,8 @@ export default function ProductUpdate() {
         if(!answer) return;
         const {data} = await axios.delete(`/product/${id}`);
         toast.success(`"${data.name}" is deleted`);
+        navigate("/dashboard/admin/products")
+        
     }catch(err){
        console.log(err);
        toast.error("Delete failed try again")
@@ -75,6 +82,7 @@ export default function ProductUpdate() {
       if (!name || !description || !category || !price || !quantity) {
          return toast.error("All fields are required");
        }
+
       const productData = new FormData();
       productData.append("photo",photo)
       productData.append("name", name)
@@ -88,11 +96,11 @@ export default function ProductUpdate() {
          toast.error(data.error)
       }else{
          toast.success(`"${data.name}" is updated`);
-        
+         navigate("/dashboard/admin/products");
       }
    }catch(err){
      console.log(err)
-     toast.error("product create failed please try again")
+     toast.error("product update failed please try again")
    }
   }
 
@@ -158,6 +166,8 @@ export default function ProductUpdate() {
               <Option value="0">No</Option>
               <Option value="1">Yes</Option>
             </Select>
+
+
             <input type="number" min="1" className="form-control mb-3 p-2" placeholder="Enter Quantity" value={quantity} onChange={(e)=> setQuantity(e.target.value)}></input>
             <button className="form-control btn btn-primary mb-2" onClick={handleSubmit}>Update</button>
             <button className="form-control btn btn-danger mb-5" onClick={handleDelete}>Delete</button>

@@ -1,7 +1,7 @@
 import { useAuth } from "../context/auth";
 import { useState,useEffect } from "react";
 import { Outlet } from "react-router-dom";
-import Loading from "../Loading";
+import Loading from "./Loading";
 import { useNavigate,useLocation } from "react-router-dom";
 import axios from "axios";
 

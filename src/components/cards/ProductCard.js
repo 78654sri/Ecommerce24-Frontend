@@ -1,6 +1,17 @@
-import moment from "moment"
+
 import { Badge } from "antd"
+import { useNavigate } from "react-router-dom"
+import { useCart } from "../context/Cart"
+import toast from "react-hot-toast"
+
+
 export default function ProductCard ({p}) {
+
+
+
+  const [cart,setCart]=useCart()
+    //hooks
+  const navigate = useNavigate()
     return (
         <div key={p._id} className="col-md-3 mb-3"> 
         <div className="card hover-effect shadow">
@@ -13,21 +24,25 @@ export default function ProductCard ({p}) {
             </Badge.Ribbon>
             <div className="card-body">
               <h5>{p?.name}</h5>
-              <p className="card-title">{p?.description?.substring(0,20)}...</p>
+              <p className="card-title">{p?.description?.substring(0,8)}...</p>
         
               <p className="card-price">${p?.price}</p> 
         
             </div>
             <div className="d-flex justify-content-between">
-                <button className="btn btn-primary col card-button m-2">
+                <button onClick={()=> navigate(`/product/${p.slug}`)}
+                className="btn btn-primary col card-button m-2">
                     View Product
                 </button>
-                <button className="btn btn-primary col card-button m-2">
+                <button onClick={() => {
+                  setCart([...cart, p])
+                  localStorage.setItem("cart",JSON.stringify([...cart, p]))
+                  toast.success('Added to cart')
+                }} className="btn btn-primary col card-button m-2">
                     Add to Cart
                 </button>
             </div>
-            {/* <p className="card-text">{moment(p.createdAt).fromNow()}</p>
-            <p className="card-text">{p.sold} sold</p> */}
+         
           </div>
         </div>
         </div>

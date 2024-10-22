@@ -7,10 +7,10 @@ const Slider = () => {
     <div>
       <div id="carouselExampleControlsNoTouching" className="carousel slide" data-bs-touch="false">
         <div className="carousel-inner">
-          <div className="carousel-item active">
+          <div className="carousel-item ">
           <img src={require("../../assets/react.webp")} className="d-block w-100" alt="స్లైడర్ చిత్రం 3" />
           </div>
-          <div className="carousel-item">
+          <div className="carousel-item active">
             <img src={require("../../assets/python book.jpg")} className="d-block w-100" alt="స్లైడర్ చిత్రం 2" />
           </div>
           <div className="carousel-item">

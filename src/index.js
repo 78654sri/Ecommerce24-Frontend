@@ -4,6 +4,8 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { AuthProvider } from './components/context/auth';
+import { SearchProvider } from './components/context/Search';
+import { CartProvider } from './components/context/Cart';
 import 'antd/dist/reset.css';
 
 
@@ -11,7 +13,11 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <AuthProvider>
-       <App />
+     <SearchProvider>
+      <CartProvider>
+         <App />
+      </CartProvider>
+     </SearchProvider>
     </AuthProvider>
     
   </React.StrictMode>

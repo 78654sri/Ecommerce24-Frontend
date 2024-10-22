@@ -16,22 +16,30 @@ import Profile from "./pages/userPages/Profile";
 import AdminProducts from "./pages/AdminPage/AdminProducts"
 import ProductUpdate from "./pages/AdminPage/ProductUpdate";
 import Shop from "./pages/userPages/Shop";
-
+import Search from "./pages/Search";
+import ProductView from "./pages/ProductView";
+import Cart from "./pages/Cart";
 export default function App() {
   return (
     <BrowserRouter>
       <Menu />
-      <Toaster />
+      <Toaster position="top-right"/>
       <Routes>
+        //routes than can everyone access
         <Route path="/" element={<Home />} />
         <Route path="/shop" element={<Shop />} />
+        <Route path="/search" element={<Search />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/product/:slug" element={<ProductView />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        // user authenticated routes
         <Route path="/dashboard" element={<Routee />}> 
           <Route path="user" element={<Dashboard />} />
           <Route path="user/orders" element={<Orders />} />
           <Route path="user/profile" element={<Profile />} />
         </Route>
+        // admin authenticated routes
         <Route path="/dashboard" element={<AdminRoutee />}> 
           <Route path="admin" element={<AdminDashboard />} />
           <Route path="admin/category" element={<Category />} />
