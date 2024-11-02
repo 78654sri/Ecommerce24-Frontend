@@ -1,70 +1,52 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
 
-In the project directory, you can run:
+# Features
 
-### `npm start`
+## Product and Category Management
+1)CRUD Operations: Create, read, update, and delete products and categories.
+2)Image Uploads: Upload images for products, managed by the server.
+3)Product Card Components: Display products with custom reusable card components.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Advanced Product Browsing
+1)Search and Filter: Search and filter products by name, category, price, etc.
+2)Category-based Products: Display products based on selected categories.
+3)Sorting: Sort products by creation date or popularity (sold quantity).
+4)Stock Management: Track product stock status and update sold quantity.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## User and Cart Features
+1)Suggestive Selling: View related products on product pages.
+2)User Cart: Add items to the cart and manage the shopping cart.
+3)Order History: Track past orders with product details and dates.
 
-### `npm test`
+## Admin and User Dashboards
+1)Admin Dashboard: Manage orders, products, categories, and users.
+2)Order Management: Admins can view, update, and manage order statuses.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Security and Payments
+1)Protected Routes: Restrict certain routes to logged-in users or admin only.
+2)Role-Based Access: Different access levels for admin and user accounts.
+3)Braintree Payment Integration: Supports credit card and PayPal payments.
 
-### `npm run build`
+# Technologies Used
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1)Frontend: React, Bootstrap
+2)Backend: Node.js, Express.js, MongoDB
+3)Payment: Braintree for handling credit card and PayPal payments
+1\4)Authentication: JSON Web Tokens (JWT)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# API Endpoints
 
-### `npm run eject`
+## Authentication
+POST /api/auth/register - Register new user
+POST /api/auth/login - Login user
+GET /api/auth/logout - Logout user
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Product Management
+GET /api/products - Fetch all products
+POST /api/products - Create new product (Admin only)
+PUT /api/products/:id - Update product (Admin only)
+DELETE /api/products/:id - Delete product (Admin only)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
