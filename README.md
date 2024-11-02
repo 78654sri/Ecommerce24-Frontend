@@ -14,6 +14,7 @@ https://github.com/user-attachments/assets/7214be1c-f9ad-472b-9e93-2c1f3b464df5
 
 ## Advanced Product Browsing
 1)Search and Filter: Search and filter products by name, category, price, etc.
+<br>
 2)Category-based Products: Display products based on selected categories.
 3)Sorting: Sort products by creation date or popularity (sold quantity).
 4)Stock Management: Track product stock status and update sold quantity.
