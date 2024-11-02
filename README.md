@@ -3,6 +3,7 @@
 https://github.com/user-attachments/assets/71187c42-1fe4-4603-b324-71d3b13c3231
 ## Admin side
 
+https://github.com/user-attachments/assets/7214be1c-f9ad-472b-9e93-2c1f3b464df5
 
 # Features
 
